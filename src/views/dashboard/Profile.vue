@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row profile">
       <div class="col-md-3">
-        <UserProfile :userData="userData"></UserProfile>
+        <UserProfile :userData="userData" @logMeOut="logoutUser"></UserProfile>
       </div>
       <div class="col-md-9">
         <ReposList :repoUrl="userData.repos_url"></ReposList>
@@ -24,13 +24,31 @@ export default {
   computed: {
     ...mapGetters({
       userData: 'getUserData',
-      accessToken: 'getAccessToken',
     }),
   },
 
   components: {
     UserProfile,
     ReposList,
+  },
+
+  methods: {
+    logoutUser() {
+      this.$session.destroy();
+      this.$router.push('/');
+    },
+  },
+
+  mounted() {
+    if (Object.keys(this.userData).length === 0) {
+      this.logoutUser();
+    }
+  },
+
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/');
+    }
   },
 };
 </script>
@@ -120,6 +138,12 @@ export default {
         color: #337ab7;
         text-decoration: none;
       }
+    }
+
+    /* Profile logout */
+    .profile-logout {
+      padding: 10px 10px;
+      border-top: 1px solid #f0f4f7;
     }
   }
 

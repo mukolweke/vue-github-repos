@@ -1,7 +1,6 @@
 <template>
   <div class="profile-sidebar">
     <div class="profile-userpic text-center">
-      <!-- <i class="fab fa-github-alt fa-5x"></i> -->
       <img :src="userData.avatar" class="img-responsive" alt />
     </div>
 
@@ -37,6 +36,9 @@
           <a href="#">{{userData.location}}</a>
         </div>
       </div>
+      <div class="profile-logout">
+        <button @click="logMeOut" class="btn btn-danger btn-block">LOGOUT</button>
+      </div>
     </div>
   </div>
 </template>
@@ -44,5 +46,11 @@
 <script>
 export default {
   props: ['userData'],
+
+  methods: {
+    logMeOut() {
+      this.$emit('logMeOut');
+    },
+  },
 };
 </script>

@@ -39,8 +39,6 @@ export default {
     fetchUserRepos() {
       if (this.repoUrl) {
         axios.get(this.repoUrl).then(({ data }) => {
-          // this.tableData.data = data;
-
           data.forEach((item) => {
             this.tableData.data.push([
               `${item.name}`,

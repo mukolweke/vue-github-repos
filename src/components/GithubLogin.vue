@@ -28,7 +28,8 @@ export default {
       window.OAuth.initialize('MGKV6a-i66BijaYHJOiDgExpX90');
 
       window.OAuth.popup('github').then((result) => {
-        this.$store.dispatch('saveAccessToken', result.access_token);
+        this.$session.start();
+        this.$session.set('access_token', result.access_token);
 
         result.get('/user').then((data) => {
           const form = {
