@@ -23,7 +23,6 @@ export default {
   props: {
     name: String,
   },
-  name: 'Home',
   methods: {
     signin() {
       window.OAuth.initialize('MGKV6a-i66BijaYHJOiDgExpX90');
@@ -31,12 +30,11 @@ export default {
       window.OAuth.popup('github').then((result) => {
         this.$store.dispatch('saveAccessToken', result.access_token);
 
-        // result.me().then(data => {
-        // console.log('data: ', data);
-        // });
-
         result.get('/user').then((data) => {
+          console.log(data);
+
           const form = {
+            avatar: data.avatar_url,
             username: data.login,
             name: data.name,
             email: data.email,
@@ -50,6 +48,8 @@ export default {
           };
 
           this.$store.commit('SAVE_USER_DATA', form);
+
+          this.$router.push({ name: 'profile' });
         });
       });
     },

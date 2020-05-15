@@ -5,21 +5,19 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    gitAccessToken: '',
+    accessToken: '',
     userData: {},
   },
 
   getters: {
-    getGitAccessToken: (state) => state.gitAccessToken,
+    getAccessToken: (state) => state.accessToken,
 
     getUserData: (state) => state.userData,
   },
 
   mutations: {
     SAVE_ACCESS_TOKEN(state, token) {
-      console.log('token', token);
-
-      state.gitAccessToken = token;
+      state.accessToken = token;
     },
 
     SAVE_USER_DATA(state, userData) {
