@@ -7,11 +7,21 @@
             <i class="fas fa-code-branch fa-3x"></i>
           </h1>
           <br />
-          <p>Create an account or login</p>
-          <a @click="signin" class="btn btn-secondary btn-block">
-            <i class="fab fa-github"></i>
-            &nbsp;&nbsp;Sign in with {{name}}
-          </a>
+          <p>View all your public repos ...</p>
+          <div class="text-center">
+            <button @click="signin" class="btn btn-secondary" :disabled="signingInUser">
+              <span
+                class="spinner-border spinner-grow-sm"
+                role="status"
+                v-if="signingInUser"
+              >
+                <span class="sr-only">Loading...</span>
+              </span>
+
+              <i class="fab fa-github" v-else></i>
+              &nbsp;&nbsp;Sign in with {{name}}
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -23,8 +33,17 @@ export default {
   props: {
     name: String,
   },
+
+  data() {
+    return {
+      signingInUser: false,
+    };
+  },
+
   methods: {
     signin() {
+      this.signingInUser = true;
+
       window.OAuth.initialize('MGKV6a-i66BijaYHJOiDgExpX90');
 
       window.OAuth.popup('github').then((result) => {
@@ -45,6 +64,8 @@ export default {
             followers_count: data.followers,
             following_count: data.following,
           };
+
+          this.signingInUser = false;
 
           this.$store.commit('SAVE_USER_DATA', form);
 
