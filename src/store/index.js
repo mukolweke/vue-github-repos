@@ -21,8 +21,6 @@ export default new Vuex.Store({
     },
 
     SAVE_USER_DATA(state, userData) {
-      console.log('userdata', userData);
-
       state.userData = userData;
     },
   },

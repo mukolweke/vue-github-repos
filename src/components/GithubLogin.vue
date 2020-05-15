@@ -31,8 +31,6 @@ export default {
         this.$store.dispatch('saveAccessToken', result.access_token);
 
         result.get('/user').then((data) => {
-          console.log(data);
-
           const form = {
             avatar: data.avatar_url,
             username: data.login,
