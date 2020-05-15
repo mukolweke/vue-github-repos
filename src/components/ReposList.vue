@@ -1,5 +1,6 @@
 <template>
   <div class="container profile-content">
+    <h1 class="profile-content-title">Public Repositories</h1>
     <vue-table-dynamic :params="tableData" ref="table"></vue-table-dynamic>
   </div>
 </template>
@@ -59,3 +60,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .profile-content-title {
+    color: #7f90a4;
+    font-size: 17px;
+    font-weight: 600;
+  }
+</style>

@@ -69,7 +69,7 @@ export default {
 
           this.$store.commit('SAVE_USER_DATA', form);
 
-          this.$router.push({ name: 'profile' });
+          this.$router.push({ name: 'profile', params: { username: data.login } });
         });
       });
     },
