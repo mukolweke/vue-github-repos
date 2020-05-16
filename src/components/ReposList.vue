@@ -13,6 +13,8 @@ import filters from '../filters';
 export default {
   props: ['repoUrl'],
 
+  name: 'ReposList',
+
   data() {
     return {
       tableData: {
@@ -37,25 +39,23 @@ export default {
       return filters.dateTimeFilter(date);
     },
 
-    fetchUserRepos() {
+    async fetchUserRepos() {
       if (this.repoUrl) {
-        axios.get(this.repoUrl).then(({ data }) => {
-          data.forEach((item) => {
-            this.tableData.data.push([
-              `${item.name}`,
-              `${item.forks_count}`,
-              `${item.size}`,
-              this.dateFilter(item.created_at),
-              this.dateFilter(item.updated_at),
-            ]);
-          });
+        const { data } = await axios.get(this.repoUrl);
+        data.forEach((item) => {
+          this.tableData.data.push([
+            `${item.name}`,
+            `${item.forks_count}`,
+            `${item.size}`,
+            this.dateFilter(item.created_at),
+            this.dateFilter(item.updated_at),
+          ]);
         });
       }
     },
   },
 
   mounted() {
-    // `${item.html_url}`,
     this.fetchUserRepos();
   },
 };

@@ -47,6 +47,8 @@
 export default {
   props: ['userData'],
 
+  name: 'UserProfile',
+
   methods: {
     logMeOut() {
       this.$emit('logMeOut');
