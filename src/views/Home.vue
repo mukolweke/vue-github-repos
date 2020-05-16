@@ -1,16 +1,16 @@
 <template>
   <div class="home">
-    <GithubLogin name="Github"></GithubLogin>
+    <Login name="Github"></Login>
   </div>
 </template>
 
 <script>
-import GithubLogin from '@/components/GithubLogin.vue';
+import Login from '@/components/Login.vue';
 
 export default {
   name: 'Home',
   components: {
-    GithubLogin,
+    Login,
   },
 };
 </script>
